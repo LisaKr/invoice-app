@@ -1,0 +1,25 @@
+{
+  "invoices": [
+    {
+      "id": 1,
+      "data": "2018-01-01",
+      "title": "Rent January",
+      "sum": 500,
+      "iban": "DE878787878787878"
+    },
+    {
+      "id": 2,
+      "data": "2018-01-01",
+      "title": "Rent January",
+      "sum": 500,
+      "iban": "DE878787878787878"
+    },
+    {
+      "id": 3,
+      "data": "2018-01-01",
+      "title": "Rent January",
+      "sum": 500,
+      "iban": "DE878787878787878"
+    }
+  ]
+}
