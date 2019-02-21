@@ -1,17 +1,10 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import InvoiceDialogEdit from "./invoiceDialogEdit.js";
+import InvoiceDialogEdit from "../invoiceDialogEdit.js";
 
 describe("invoiceDialogEdit.js", () => {
   // const fakeFunc = jest.fn();
   // fakeFunc.mockReturnValue("active");
-
-  it("renders header with the right text", () => {
-    const wrapper = mount(
-      <InvoiceDialogEdit invoice={{ sum: 500, title: "rent", id: "444" }} />
-    );
-    expect(wrapper.find("h1").text()).toEqual("Edit this invoice");
-  });
 
   it("renders two inputs", () => {
     const wrapper = mount(

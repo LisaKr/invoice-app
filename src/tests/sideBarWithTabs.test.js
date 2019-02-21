@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import SideBarWithTabs from "./sideBarWithTabs.js";
+import SideBarWithTabs from "../sideBarWithTabs.js";
 
 describe("noIbanField.js", () => {
   const fakeFunc = jest.fn();

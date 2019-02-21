@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import NoIbanField from "./noIbanField.js";
+import NoIbanField from "../noIbanField.js";
 
 describe("noIbanField.js", () => {
   const fakeFunc = jest.fn();
@@ -24,4 +24,6 @@ describe("noIbanField.js", () => {
   //I would check whether onChange event works properly
 
   //I would check whether onClick event works properly
+
+  //I would also change that the switch button changes the state correctly
 });

@@ -67,7 +67,7 @@ class InvoiceDialogAdd extends Component {
     ) {
       return "non-active";
     } else if (value === "result") {
-      return "non-active";
+      return "result";
     }
   }
 

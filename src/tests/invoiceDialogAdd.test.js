@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import InvoiceDialogAdd from "./invoiceDialogAdd.js";
-import NoIbanField from "./noIbanField.js";
+import InvoiceDialogAdd from "../invoiceDialogAdd.js";
 
 describe("IbanField.js", () => {
   const fakeFunc = jest.fn();
@@ -13,13 +12,11 @@ describe("IbanField.js", () => {
     expect(div.hasClass("invoiceDialogAdd-container")).toBe(true);
   });
 
-  //THIS IS NOW IN A DIFFERENT FILE
-  //I would also test that the components renders the expected component based on state
-  //I would also change that the switch button changes the state correctly
-
   it("returns correct class in the getClass function", () => {
     const wrapper = mount(<InvoiceDialogAdd getClass={fakeFunc} />);
     wrapper.setState({ checked: false });
     expect(wrapper.instance().getClass("information")).toEqual("active");
   });
+
+  //I would also test that handleChange sets state correctly
 });

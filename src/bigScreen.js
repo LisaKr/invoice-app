@@ -5,12 +5,9 @@ import IbanField from "./ibanField";
 import NoIbanField from "./noIbanField";
 
 class BigScreen extends Component {
-  componentDidMount() {
-    console.log("big mounted");
-  }
   render() {
     return (
-      <div className="bigScreenAdd">
+      <div className="bigScreen">
         <SideBarWithTabs getClass={this.props.getClass} />
 
         {!this.props.ibanFieldShown && (

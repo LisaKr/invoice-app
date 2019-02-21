@@ -4,7 +4,8 @@ class Buttons extends Component {
   render() {
     return (
       <div className="button-container">
-        <button
+        <img
+          src="/edit1.png"
           onClick={() => {
             this.props.showDialogueEditButton(
               this.props.id,
@@ -13,10 +14,8 @@ class Buttons extends Component {
               this.props.iban
             );
           }}
-        >
-          Edit
-        </button>
-        <button> Delete </button>
+        />
+        <img src="delete1.png" />
       </div>
     );
   }

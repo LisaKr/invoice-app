@@ -10,7 +10,9 @@ class Invoices extends Component {
           return (
             <div key={i.id} className="invoice">
               {/*passing the id of the current invoice so that the button knows which invoice to edit or delete in the database */}
-              {i.date} || {i.title} || {i.sum} Euro || {i.iban} ||
+              <div className="invoice-details">
+                {i.date} || {i.title} || {i.sum} Euro || {i.iban}
+              </div>
               <Buttons
                 id={i.id}
                 title={i.title}

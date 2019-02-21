@@ -125,17 +125,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="invoices-container">
+      <div className="container">
         <Title text={"Your invoices"} />
 
         {/*did not extract this button into extra component as it only appears one time ever in the whole app*/}
-        <button
+        <img
           onClick={() => {
             this.showDialogueAddButton();
           }}
-        >
-          Add invoice
-        </button>
+          src="/add1.png"
+        />
 
         {this.state.invoices && (
           <Invoices

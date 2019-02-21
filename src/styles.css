@@ -8,46 +8,57 @@ body {
 
 button {
   margin-left: 0.5em;
+  padding: 1em;
+  background: #a5ffd6;
+  margin: 2em;
+  border: none;
+  font-size: 16px;
+  border-radius: 10px;
+  color: #36413e;
+  cursor: pointer;
 }
 
-.invoices-container {
+.container {
   position: relative;
-  width: 50%;
+  width: 55%;
   margin: 0 auto;
-  border: 1px solid black;
   padding: 2em;
   text-align: center;
-}
-
-.invoices-container h1 {
-  display: inline;
+  border-radius: 10px;
+  background: #9aa0a8;
 }
 
 .invoice {
-  border: 1px solid black;
   margin: 1em;
   padding: 1em;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  background: #e5d4c0;
+  border-radius: 10px;
+}
+
+.invoice-result {
+  display: flex;
+  justify-content: space-between;
 }
 
 .invoiceDialogEdit-container,
 .invoiceDialogAdd-container {
-  height: 100%;
-  width: 100%;
+  height: 70%;
+  width: 80%;
   position: absolute;
   z-index: 99;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border: 1px solid black;
-  background: lavender;
-}
-
-.invoiceDialogEdit-container {
-  background: lavender;
-}
-
-.invoiceDialogAdd-container {
-  background: lightblue;
+  background: #e8eef2;
+  border-radius: 10px;
+  color: #36413e;
 }
 
 .invoiceDialogAdd-container input,
@@ -67,7 +78,8 @@ button {
   left: 0;
   height: 100%;
   background: rgba(255, 255, 255, 0.6);
-  width: 15%;
+  width: 20%;
+  border-radius: 10px 0 0 0;
 }
 
 .inputs {
@@ -78,8 +90,12 @@ button {
 }
 
 .active {
-  background: green;
+  background: #a5ffd6;
   padding: 1em;
+}
+
+.react-switch-bg {
+  background: #a5ffd6;
 }
 
 .non-active {
@@ -94,23 +110,29 @@ button {
   font-size: 0.8em;
 }
 
+.searchResults {
+  overflow: scroll;
+}
+
 .result {
   padding: 1em;
   border: 1px solid black;
   width: 60%;
-  margin: 0 auto;
+  margin: 0.1em auto;
+  cursor: pointer;
+  background: #e5d4c0;
+  border-radius: 10px;
 }
 
-/* @media screen and (max-width: 600px) {
-  .choosingTabs {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    height: 20%;
-  }
+img {
+  margin-left: 0.5em;
+  cursor: pointer;
+}
 
-  .inputs {
-    margin-top: 35%;
-  }
-} */
+.bigScreen {
+  margin-left: 20%;
+}
+
+.bigScreen input {
+  margin-bottom: 0;
+}

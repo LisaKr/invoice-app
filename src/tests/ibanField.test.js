@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import IbanField from "./ibanField.js";
+import IbanField from "../ibanField.js";
 
 describe("IbanField.js", () => {
   const fakeFunc = jest.fn();
@@ -8,7 +8,12 @@ describe("IbanField.js", () => {
 
   it("renders header with the right text", () => {
     const wrapper = mount(<IbanField getClass={fakeFunc} />);
-    expect(wrapper.find("p").text()).toEqual("Search IBANs");
+    expect(
+      wrapper
+        .find("div")
+        .at(0)
+        .hasClass("ibanField")
+    ).toBe(true);
   });
 
   //Should test whether change in the search field triggers an action. could not figure out why the mock function is not being called

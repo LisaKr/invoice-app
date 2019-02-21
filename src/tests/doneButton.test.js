@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
-import DoneButton from "./doneButton.js";
+import DoneButton from "../doneButton.js";
 
 describe("doneButton.js", () => {
   const fakeFunc = jest.fn();

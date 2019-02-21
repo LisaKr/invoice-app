@@ -64,7 +64,7 @@ class IbanField extends Component {
 
   render() {
     return (
-      <div>
+      <div className="ibanField">
         <Title text="Search IBANs" />
 
         <input
