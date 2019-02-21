@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import Title from "./title.js";
+import Input from "./input.js";
 
 class InvoiceDialogEdit extends Component {
   constructor() {
     super();
     this.state = {};
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
@@ -15,22 +18,18 @@ class InvoiceDialogEdit extends Component {
   render() {
     return (
       <div className="invoiceDialogEdit-container">
-        <h1> Edit this invoice </h1>
-        <input
-          placeholder="amount"
-          name="amount"
-          defaultValue={this.props.invoice.sum}
-          onChange={e => {
-            this.handleChange(e);
-          }}
+        <Title text={"Edit this invoice"} />
+        <Input
+          placeholder={"amount"}
+          name={"amount"}
+          value={this.props.invoice.sum}
+          handleChange={this.handleChange}
         />
-        <input
-          placeholder="iban"
-          name="iban"
-          defaultValue={this.props.invoice.iban}
-          onChange={e => {
-            this.handleChange(e);
-          }}
+        <Input
+          placeholder={"iban"}
+          name={"iban"}
+          value={this.props.invoice.iban}
+          handleChange={this.handleChange}
         />
         <button
           onClick={() => {

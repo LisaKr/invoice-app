@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 
 import DoneButton from "./doneButton";
+import Title from "./title";
+import SearchResults from "./searchResults";
 
+//mocking database data
 let ibans = [
   {
     id: 1,
@@ -34,18 +37,19 @@ class IbanField extends Component {
     this.showDoneButton = this.showDoneButton.bind(this);
   }
 
-  getSearchResults(e) {
+  getSearchResults(value) {
     let matches;
     //if the field is empty
-    if (e.target.value == "") {
+    if (value === "") {
       matches = [];
     } else {
       matches = ibans.filter(item => {
-        return item.iban.indexOf(e.target.value) == 0;
+        return item.iban.indexOf(value) === 0;
       });
     }
 
     this.setState({ searchResults: matches });
+    return matches;
   }
 
   showDoneButton(date, title, amount, iban) {
@@ -61,32 +65,24 @@ class IbanField extends Component {
   render() {
     return (
       <div>
-        <p> Search IBANs</p>
+        <Title text="Search IBANs" />
+
         <input
           placeholder="search for IBAN"
           name="iban"
           onChange={e => {
-            this.getSearchResults(e);
+            this.getSearchResults(e.target.value);
           }}
         />
 
-        <div className="searchResults">
-          {this.state.searchResults &&
-            this.state.searchResults.map(r => {
-              return (
-                <div
-                  key={r.id}
-                  className={this.props.getClass("result", r.id)}
-                  onClick={() => {
-                    this.showDoneButton(r.date, r.title, r.sum, r.iban);
-                    this.props.handleSelection(r);
-                  }}
-                >
-                  {r.date} || {r.iban} || {r.sum} || {r.title}
-                </div>
-              );
-            })}
-        </div>
+        {this.state.searchResults && (
+          <SearchResults
+            searchResults={this.state.searchResults}
+            getClass={this.props.getClass}
+            showDoneButton={this.showDoneButton}
+            handleSelection={this.props.handleSelection}
+          />
+        )}
 
         {this.state.showDoneButton && (
           <DoneButton

@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import Switch from "react-switch";
+import { MatchMediaHOC } from "react-match-media";
 
-import SideBarWithTabs from "./sideBarWithTabs";
-import IbanField from "./ibanField";
-import NoIbanField from "./noIbanField";
-import DoneButton from "./doneButton";
+import SmallScreen from "./smallScreen";
+import BigScreen from "./bigScreen";
+
+const ComponentForBigScreen = MatchMediaHOC(BigScreen, "(min-width: 600px)");
+const ComponentForSmallScreen = MatchMediaHOC(
+  SmallScreen,
+  "(max-width: 599px)"
+);
 
 class InvoiceDialogAdd extends Component {
   constructor() {
@@ -53,13 +57,13 @@ class InvoiceDialogAdd extends Component {
     } else if (
       this.props.selectedResult &&
       value === "result" &&
-      id == this.props.selectedResult.id
+      id === this.props.selectedResult.id
     ) {
       return "active";
     } else if (
       this.props.selectedResult &&
       value === "result" &&
-      id != this.props.selectedResult.id
+      id !== this.props.selectedResult.id
     ) {
       return "non-active";
     } else if (value === "result") {
@@ -78,37 +82,20 @@ class InvoiceDialogAdd extends Component {
   render() {
     return (
       <div className="invoiceDialogAdd-container">
-        {/*Separate sidebar and inputs into separate components*/}
-        <SideBarWithTabs getClass={this.getClass} />
-
-        {!this.state.ibanFieldShown && (
-          <NoIbanField
-            checked={this.state.checked}
-            handleInputChange={this.handleInputChange}
-            handleChange={this.handleChange}
-            hideAddDialog={this.props.hideAddDialog}
-            getClass={this.getClass}
-            handleSelection={this.props.handleSelection}
-            hideAddDialog={this.props.hideAddDialog}
-            date={this.state.date}
-            title={this.state.title}
-            amount={this.state.amount}
-            showIbanField={this.showIbanField}
-          />
-        )}
-
-        {this.state.ibanFieldShown && (
-          <IbanField
-            getClass={this.getClass}
-            handleSelection={this.props.handleSelection}
-            hideAddDialog={this.props.hideAddDialog}
-            date={this.state.date}
-            title={this.state.title}
-            amount={this.state.amount}
-          />
-        )}
-
-        <br />
+        <ComponentForBigScreen
+          getClass={this.getClass}
+          checked={this.state.checked}
+          handleChange={this.handleChange}
+          handleInputChange={this.handleInputChange}
+          hideAddDialog={this.props.hideAddDialog}
+          date={this.state.date}
+          title={this.state.title}
+          amount={this.state.amount}
+          showIbanField={this.showIbanField}
+          handleSelection={this.props.handleSelection}
+          ibanFieldShown={this.state.ibanFieldShown}
+        />
+        <ComponentForSmallScreen />
       </div>
     );
   }

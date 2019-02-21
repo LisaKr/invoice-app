@@ -1,31 +1,31 @@
 import React, { Component } from "react";
-
 import Switch from "react-switch";
+
 import DoneButton from "./doneButton";
+import Title from "./title.js";
+import Input from "./input.js";
 
 class NoIbanField extends Component {
   render() {
     return (
       <div className="inputs">
-        <h1> Add an invoice! </h1>
+        <Title text={"Add an invoice!"} />
         {!this.props.checked && (
-          <input
-            placeholder="date"
-            name="date"
-            onChange={e => {
-              this.props.handleInputChange(e);
-            }}
+          <Input
+            placeholder={"date"}
+            name={"date"}
+            handleChange={this.props.handleInputChange}
           />
         )}
+
         {!this.props.checked && (
-          <input
-            placeholder="title"
-            name="title"
-            onChange={e => {
-              this.props.handleInputChange(e);
-            }}
+          <Input
+            placeholder={"title"}
+            name={"title"}
+            handleChange={this.props.handleInputChange}
           />
         )}
+
         <div className="switch">
           <p> Retrieve amount from bank account </p>
 
@@ -36,15 +36,13 @@ class NoIbanField extends Component {
         </div>
         {/*only if toggle is on "off" and it is the payment without iban*/}
         {!this.props.checked && (
-          <input
-            placeholder="amount"
-            name="amount"
-            onChange={e => {
-              this.props.handleInputChange(e);
-            }}
+          <Input
+            placeholder={"amount"}
+            name={"amount"}
+            handleChange={this.props.handleInputChange}
           />
         )}
-
+        {/*This button only appears once, so that I donnt extract it in a separate component*/}
         {this.props.checked && (
           <button onClick={this.props.showIbanField}>Next</button>
         )}
