@@ -1,23 +1,17 @@
+/*///GENERAL LOOK//*/
+
 body {
   font-family: "Helvetica Neue";
 }
 
-.button-container {
-  display: inline-block;
+button,
+input {
+  outline: none;
 }
 
-button {
-  margin-left: 0.5em;
-  padding: 1em;
-  background: #a5ffd6;
-  margin: 2em;
-  border: none;
-  font-size: 16px;
-  border-radius: 10px;
-  color: #36413e;
-  cursor: pointer;
-}
+/*//////////////////*/
 
+/*Showing the invoices we already have*/
 .container {
   position: relative;
   width: 55%;
@@ -26,16 +20,19 @@ button {
   text-align: center;
   border-radius: 10px;
   background: #9aa0a8;
+  overflow: scroll;
+}
+
+img {
+  margin-left: 0.5em;
+  cursor: pointer;
 }
 
 .invoice {
   margin: 1em;
   padding: 1em;
-  display: -webkit-flex;
   display: flex;
-  -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: space-between;
   justify-content: space-between;
   background: #e5d4c0;
   border-radius: 10px;
@@ -45,9 +42,17 @@ button {
   display: flex;
   justify-content: space-between;
 }
+/*for the edit+delete button*/
+.button-container {
+  display: inline-block;
+}
 
-.invoiceDialogEdit-container,
-.invoiceDialogAdd-container {
+/*//////////////////*/
+
+/*Add/Edit invoice dialogue*/
+
+.invoiceDialogueEdit-container,
+.invoiceDialogueAdd-container {
   height: 70%;
   width: 80%;
   position: absolute;
@@ -61,17 +66,54 @@ button {
   color: #36413e;
 }
 
-.invoiceDialogAdd-container input,
-.invoiceDialogEdit-container input {
+.invoiceDialogueAdd-container input,
+.invoiceDialogueEdit-container input {
   width: 150px;
   padding: 0.5em;
   margin: 0.5em;
 }
-
-.invoiceDialogEdit-container h1 {
-  display: block;
+.information {
+  border-radius: 10px 0 0 0;
 }
 
+/*Add dialogue input fields container*/
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin-left: 0.5em;
+  padding: 1em;
+  background: #a5ffd6;
+  margin: 2em;
+  border: none;
+  font-size: 16px;
+  border-radius: 10px;
+  color: #36413e;
+  cursor: pointer;
+}
+/*signifying selected vs not selected items*/
+.active {
+  background: #a5ffd6;
+  padding: 1em;
+}
+
+.non-active {
+  background: grey;
+  opacity: 0.3;
+  padding: 1em;
+  color: black;
+}
+/*toggle and the accompanying text*/
+.toggle {
+  display: flex;
+  font-size: 0.8em;
+}
+
+/*sideBar of the dialogue*/
 .choosingTabs {
   position: absolute;
   top: 0;
@@ -82,33 +124,16 @@ button {
   border-radius: 10px 0 0 0;
 }
 
-.inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/*dialogue for large screen*/
+.bigScreen {
+  margin-left: 20%;
 }
 
-.active {
-  background: #a5ffd6;
-  padding: 1em;
+.bigScreen input {
+  margin-bottom: 0;
 }
 
-.react-switch-bg {
-  background: #a5ffd6;
-}
-
-.non-active {
-  background: grey;
-  opacity: 0.3;
-  padding: 1em;
-  color: black;
-}
-
-.toggle {
-  display: flex;
-  font-size: 0.8em;
-}
+/*///////serach by IBAN field//////*/
 
 .searchResults {
   overflow: scroll;
@@ -122,17 +147,4 @@ button {
   cursor: pointer;
   background: #e5d4c0;
   border-radius: 10px;
-}
-
-img {
-  margin-left: 0.5em;
-  cursor: pointer;
-}
-
-.bigScreen {
-  margin-left: 20%;
-}
-
-.bigScreen input {
-  margin-bottom: 0;
 }

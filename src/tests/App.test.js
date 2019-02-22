@@ -9,7 +9,13 @@ describe("app.js", () => {
     expect(div.hasClass("container")).toBe(true);
   });
 
-  //I would check whether hideAddDialog, handleSelection and updateInvoice perform and set the state correctly
+  it("fires an event after clicking on the add button", () => {
+    const wrapper = mount(<App />);
+    const add = jest.fn();
+    wrapper.instance().handleBtnClick = add;
+    wrapper.instance().handleBtnClick();
+    expect(add).toHaveBeenCalled();
+  });
 
-  //I would check whether onCLick event on the Add button is triggered properly
+  //I would also check whether hideAddDialogue, handleSelection and updateInvoice perform and set the state correctly
 });

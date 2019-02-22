@@ -16,28 +16,17 @@ describe("IbanField.js", () => {
     ).toBe(true);
   });
 
-  //Should test whether change in the search field triggers an action. could not figure out why the mock function is not being called
-
-  // it("triggers an action onChange in the search field", () => {
-  // const onSearchMock = jest.fn();
-  //
-  // const wrapper = mount(<IbanField />);
-  //
-  // const input = wrapper.find("input");
-  //
-  // input.simulate("change", {
-  //   target: {
-  //     value: "VALUE"
-  //   }
-  // });
-  //
-  // expect(onSearchMock).toBeCalledWith("VALUE");
-
   it("returns a correct search result when provided with an example value", () => {
     const wrapper = mount(<IbanField getClass={fakeFunc} />);
     const value = "DE456";
     expect(wrapper.instance().getSearchResults(value)).toEqual([
-      { date: "2018-01-05", iban: "DE456", id: 2, sum: 500, title: "Rent May" }
+      {
+        date: "2018-01-05",
+        iban: "DE456",
+        id: 2,
+        amount: 500,
+        title: "Rent May"
+      }
     ]);
   });
 
@@ -57,4 +46,21 @@ describe("IbanField.js", () => {
     wrapper.instance().handleBtnClick();
     expect(mockShowDoneButton).toHaveBeenCalled();
   });
+
+  //Should test whether change in the search field triggers an action. could not figure out why the mock function is not being called
+
+  // it("triggers an action onChange in the search field", () => {
+  // const onSearchMock = jest.fn();
+  //
+  // const wrapper = mount(<IbanField />);
+  //
+  // const input = wrapper.find("input");
+  //
+  // input.simulate("change", {
+  //   target: {
+  //     value: "VALUE"
+  //   }
+  // });
+  //
+  // expect(onSearchMock).toBeCalledWith("VALUE");
 });

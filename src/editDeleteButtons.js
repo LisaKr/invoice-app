@@ -10,12 +10,17 @@ class Buttons extends Component {
             this.props.showDialogueEditButton(
               this.props.id,
               this.props.title,
-              this.props.sum,
+              this.props.amount,
               this.props.iban
             );
           }}
         />
-        <img src="delete1.png" />
+        <img
+          src="delete1.png"
+          onClick={() => {
+            this.props.deleteInvoice(this.props.id);
+          }}
+        />
       </div>
     );
   }

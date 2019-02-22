@@ -18,9 +18,9 @@ describe("doneButton.js", () => {
 
   it("fires an event after clicking on the button", () => {
     const wrapper = mount(<DoneButton getClass={fakeFunc} />);
-    const mockHideAddDialog = jest.fn();
-    wrapper.instance().handleBtnClick = mockHideAddDialog;
+    const mockhideAddDialogue = jest.fn();
+    wrapper.instance().handleBtnClick = mockhideAddDialogue;
     wrapper.instance().handleBtnClick();
-    expect(mockHideAddDialog).toHaveBeenCalled();
+    expect(mockhideAddDialogue).toHaveBeenCalled();
   });
 });

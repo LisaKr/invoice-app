@@ -8,14 +8,15 @@ class BigScreen extends Component {
   render() {
     return (
       <div className="bigScreen">
+        {/*sidebar is always shown, the active tab is signified by color (this is why we're passing the getClass)*/}
         <SideBarWithTabs getClass={this.props.getClass} />
-
+        {/*if the toggle is off and the next button is not clicked*/}
         {!this.props.ibanFieldShown && (
           <NoIbanField
             checked={this.props.checked}
             handleInputChange={this.props.handleInputChange}
             handleChange={this.props.handleChange}
-            hideAddDialog={this.props.hideAddDialog}
+            hideAddDialogue={this.props.hideAddDialogue}
             getClass={this.props.getClass}
             date={this.props.date}
             title={this.props.title}
@@ -23,12 +24,12 @@ class BigScreen extends Component {
             showIbanField={this.props.showIbanField}
           />
         )}
-
+        {/*if the toggle is on and the next button is clicked*/}
         {this.props.ibanFieldShown && (
           <IbanField
             getClass={this.props.getClass}
             handleSelection={this.props.handleSelection}
-            hideAddDialog={this.props.hideAddDialog}
+            hideAddDialogue={this.props.hideAddDialogue}
             date={this.props.date}
             title={this.props.title}
             amount={this.props.amount}

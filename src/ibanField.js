@@ -4,27 +4,27 @@ import DoneButton from "./doneButton";
 import Title from "./title";
 import SearchResults from "./searchResults";
 
-//mocking database data
+//mocking database data, normally we would make a request to the server on every change event in the search field
 let ibans = [
   {
     id: 1,
     date: "2018-01-04",
     title: "Rent April",
-    sum: 500,
+    amount: 500,
     iban: "DE123"
   },
   {
     id: 2,
     date: "2018-01-05",
     title: "Rent May",
-    sum: 500,
+    amount: 500,
     iban: "DE456"
   },
   {
     id: 3,
     date: "2018-01-01",
     title: "Rent June",
-    sum: 500,
+    amount: 500,
     iban: "DE123"
   }
 ];
@@ -51,7 +51,7 @@ class IbanField extends Component {
     this.setState({ searchResults: matches });
     return matches;
   }
-
+  //shows done button and provides it with the selected entry
   showDoneButton(date, title, amount, iban) {
     this.setState({
       showDoneButton: true,
@@ -91,7 +91,7 @@ class IbanField extends Component {
             title={this.state.title}
             iban={this.state.iban}
             amount={this.state.amount}
-            hideAddDialog={this.props.hideAddDialog}
+            hideAddDialogue={this.props.hideAddDialogue}
           />
         )}
       </div>

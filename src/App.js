@@ -1,32 +1,31 @@
 import React, { Component } from "react";
 
-import Buttons from "./editDeleteButtons.js";
-import InvoiceDialogEdit from "./invoiceDialogEdit.js";
-import InvoiceDialogAdd from "./invoiceDialogAdd.js";
+import InvoiceDialogueEdit from "./invoiceDialogueEdit.js";
+import InvoiceDialogueAdd from "./invoiceDialogueAdd.js";
 import Title from "./title.js";
 import Invoices from "./invoices.js";
 
-//mocking data coming from the server
+//mocking data coming from the server. normally we would ask the server to get us some data from a database
 let invoices = [
   {
     id: 1,
     date: "2018-01-01",
     title: "Rent January",
-    sum: 500,
+    amount: 500,
     iban: "DE878787878787878"
   },
   {
     id: 2,
     date: "2018-02-01",
     title: "Rent February",
-    sum: 500,
+    amount: 500,
     iban: "DE878787878787878"
   },
   {
     id: 3,
     date: "2018-03-01",
     title: "Rent March",
-    sum: 500,
+    amount: 500,
     iban: "DE878787878787878"
   }
 ];
@@ -34,29 +33,36 @@ let invoices = [
 class App extends Component {
   constructor() {
     super();
-    //invoice dialogue is initially hidden
-    this.state = { editDialogueShown: false, addDialogueShown: false };
+    //invoice Dialogues are initially hidden
+    this.state = {
+      editDialogueShown: false,
+      addDialogueShown: false,
+      currentInvoice: {}
+    };
     this.showDialogueEditButton = this.showDialogueEditButton.bind(this);
     this.showDialogueAddButton = this.showDialogueAddButton.bind(this);
-    this.hideAddDialog = this.hideAddDialog.bind(this);
+    this.hideAddDialogue = this.hideAddDialogue.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.updateInvoice = this.updateInvoice.bind(this);
+    this.deleteInvoice = this.deleteInvoice.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     //normally this data will come from a database in the back. for mock purposes its coming from a local array
-    // let invoices = await axios.get("./invoices.json");
     this.setState({
-      invoices: invoices,
-      currentInvoice: {}
+      invoices: invoices
     });
   }
 
-  showDialogueEditButton(id, title, sum, iban) {
+  //this function is passed to invoices which in turn passes it to the editAndDeleteButtons. the edit button triggers this
+  //function and passes back the details of the invoice this button belongs to. this data gets put in state in order to be
+  //passed to the Edit Dialogue to pre-populate the fields. it is also used later on in updating the edited invoice. also
+  //the edit dialogue itself gets shown
+  showDialogueEditButton(id, title, amount, iban) {
     let currentInvoice = Object.assign({}, this.state.currentInvoice); //creating copy of object
     currentInvoice.id = id;
     currentInvoice.title = title;
-    currentInvoice.sum = sum;
+    currentInvoice.amount = amount;
     currentInvoice.iban = iban; //updating value
 
     this.setState({ currentInvoice });
@@ -65,36 +71,47 @@ class App extends Component {
     });
   }
 
+  //showing add dialogue. is only being used in this component
   showDialogueAddButton() {
     this.setState({
       addDialogueShown: true
     });
   }
 
-  hideAddDialog(date, title, amount, iban) {
-    invoices.push({
+  //function that hides adding dialogue after a new invoice was added. also updates the state with the new invoice
+  //which causes the component to re-render and show the complete list including the new one.
+  //the data of the new invoice is being passed from the doneButton component which receives the data about
+  //which component is being added from invoiceDialogueAdd which in turn gets it
+  //from IbanField/NoIbanField (it's what the user puts in the input field)
+  hideAddDialogue(date, title, amount, iban) {
+    let temp = this.state.invoices.slice();
+    temp.push({
       id: invoices.length + 1,
       date: date,
       title: title,
-      sum: amount,
+      amount: amount,
       iban: iban || "no iban"
     });
 
     this.setState({
-      invoices: invoices,
+      invoices: temp,
       addDialogueShown: false
     });
   }
 
+  //the function that is passed to the IbanField. Runs when the user selects some of presented search results.
+  //puts it in state and passes it down to InvoiceDialogueAdd in order to use it in the getCLass function there
+  //to determine which class to assign to the search results
   handleSelection(result) {
     this.setState({
       selectedResult: result
     });
   }
-
+  //runs after the done button in the edit dialogue is clicked. the data is coming from the input fileds in the
+  //edit dialogue. updates the current state with the updated invoice
   updateInvoice(id, iban, amount) {
     console.log(id, iban, amount);
-    //request to the server to update the database
+    //normally there will be a request to the server to update the database
     let invoicesCopy = this.state.invoices.slice(); //creating copy of object
 
     invoicesCopy.map(i => {
@@ -102,16 +119,18 @@ class App extends Component {
         //if both are provided, then update
         if (iban !== undefined && amount !== undefined) {
           i.iban = iban;
-          i.sum = amount;
-          //
+          i.amount = amount;
+          //if only amount was updated
         } else if (iban === undefined && amount !== undefined) {
-          i.sum = amount;
+          i.amount = amount;
           i.iban = this.state.currentInvoice.iban;
+          //if only iban was updated
         } else if (amount === undefined && iban !== undefined) {
           i.iban = iban;
-          i.sum = this.state.currentInvoice.sum;
+          i.amount = this.state.currentInvoice.amount;
+          //if nothing was updated
         } else {
-          i.sum = this.state.currentInvoice.sum;
+          i.amount = this.state.currentInvoice.amount;
           i.iban = this.state.currentInvoice.iban;
         }
       }
@@ -123,11 +142,20 @@ class App extends Component {
     });
   }
 
+  //runs after clicking on the delete button in editAndDeleteButtons. provided with the id of the invoice it belonged to
+  //updates state with the new invoices
+  deleteInvoice(id) {
+    let temp = this.state.invoices.slice();
+    temp = temp.filter(inv => inv.id != id);
+    this.setState({
+      invoices: temp
+    });
+  }
+
   render() {
     return (
       <div className="container">
         <Title text={"Your invoices"} />
-
         {/*did not extract this button into extra component as it only appears one time ever in the whole app*/}
         <img
           onClick={() => {
@@ -135,24 +163,29 @@ class App extends Component {
           }}
           src="/add1.png"
         />
-
+        {/*as soon as we retrive the invoices and put them into state they appear
+        on screen. providing invoices to render on screen, function to show the edit dialogue and to delete the
+        invoice (for both buttons it has inside)*/}
         {this.state.invoices && (
           <Invoices
             invoices={this.state.invoices}
             showDialogueEditButton={this.showDialogueEditButton}
+            deleteInvoice={this.deleteInvoice}
           />
         )}
-
+        {/*when the button/image click sets editDialogueShown to true in the state.
+        passing current invoice to populate the input fields and update invoice function to be
+        triggered on click on the done button*/}
         {this.state.editDialogueShown && (
-          <InvoiceDialogEdit
+          <InvoiceDialogueEdit
             invoice={this.state.currentInvoice}
             updateInvoice={this.updateInvoice}
           />
         )}
-
+        {/*when the button/image click sets addDialogueShown to true in the state */}
         {this.state.addDialogueShown && (
-          <InvoiceDialogAdd
-            hideAddDialog={this.hideAddDialog}
+          <InvoiceDialogueAdd
+            hideAddDialogue={this.hideAddDialogue}
             handleSelection={this.handleSelection}
             selectedResult={this.state.selectedResult}
           />

@@ -2,7 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import SideBarWithTabs from "../sideBarWithTabs.js";
 
-describe("noIbanField.js", () => {
+describe("sideBarWithTabs.js", () => {
   const fakeFunc = jest.fn();
   fakeFunc.mockReturnValue("active");
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Title from "./title.js";
 import Input from "./input.js";
 
-class InvoiceDialogEdit extends Component {
+class InvoiceDialogueEdit extends Component {
   constructor() {
     super();
     this.state = {};
@@ -17,12 +17,12 @@ class InvoiceDialogEdit extends Component {
 
   render() {
     return (
-      <div className="invoiceDialogEdit-container">
+      <div className="invoiceDialogueEdit-container">
         <Title text={"Edit this invoice"} />
         <Input
           placeholder={"amount"}
           name={"amount"}
-          value={this.props.invoice.sum}
+          value={this.props.invoice.amount}
           handleChange={this.handleChange}
         />
         <Input
@@ -33,6 +33,7 @@ class InvoiceDialogEdit extends Component {
         />
         <button
           onClick={() => {
+            //passing back the update values of iban and amiunt and the existing id
             this.props.updateInvoice(
               this.props.invoice.id,
               this.state.iban,
@@ -47,4 +48,4 @@ class InvoiceDialogEdit extends Component {
   }
 }
 
-export default InvoiceDialogEdit;
+export default InvoiceDialogueEdit;

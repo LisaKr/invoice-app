@@ -10,6 +10,8 @@ class NoIbanField extends Component {
     return (
       <div className="inputs">
         <Title text={"Add an invoice!"} />
+        {/*I decided to only show input fields if the toggle is off, as we are getting date, title and amount from
+            the bank transfer anyway if we're selcting the iban option*/}
         {!this.props.checked && (
           <Input
             placeholder={"date"}
@@ -34,7 +36,7 @@ class NoIbanField extends Component {
             checked={this.props.checked}
           />
         </div>
-        {/*only if toggle is on "off" and it is the payment without iban*/}
+
         {!this.props.checked && (
           <Input
             placeholder={"amount"}
@@ -49,7 +51,7 @@ class NoIbanField extends Component {
 
         {!this.props.checked && (
           <DoneButton
-            hideAddDialog={this.props.hideAddDialog}
+            hideAddDialogue={this.props.hideAddDialogue}
             date={this.props.date}
             title={this.props.title}
             amount={this.props.amount}

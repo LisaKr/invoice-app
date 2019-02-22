@@ -14,4 +14,4 @@ describe("bigScreen.js", () => {
 });
 
 //I would also test that the components renders the expected component based on the
-//passed props (this.props.ibanFieldShown)
+//passed props (this.props.ibanFieldShown true or false)

@@ -10,11 +10,11 @@ class SearchResults extends Component {
               key={r.id}
               className={this.props.getClass("result", r.id)}
               onClick={() => {
-                this.props.showDoneButton(r.date, r.title, r.sum, r.iban);
+                this.props.showDoneButton(r.date, r.title, r.amount, r.iban);
                 this.props.handleSelection(r);
               }}
             >
-              {r.date} || {r.iban} || {r.sum} || {r.title}
+              {r.date} || {r.iban} || {r.amount} || {r.title}
             </div>
           );
         })}

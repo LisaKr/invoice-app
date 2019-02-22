@@ -11,14 +11,15 @@ class Invoices extends Component {
             <div key={i.id} className="invoice">
               {/*passing the id of the current invoice so that the button knows which invoice to edit or delete in the database */}
               <div className="invoice-details">
-                {i.date} || {i.title} || {i.sum} Euro || {i.iban}
+                {i.date} || {i.title} || {i.amount} Euro || {i.iban}
               </div>
               <Buttons
                 id={i.id}
                 title={i.title}
-                sum={i.sum}
+                amount={i.amount}
                 iban={i.iban}
                 showDialogueEditButton={this.props.showDialogueEditButton}
+                deleteInvoice={this.props.deleteInvoice}
               />
             </div>
           );
