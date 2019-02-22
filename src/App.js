@@ -4,6 +4,7 @@ import InvoiceDialogueEdit from "./invoiceDialogueEdit.js";
 import InvoiceDialogueAdd from "./invoiceDialogueAdd.js";
 import Title from "./title.js";
 import Invoices from "./invoices.js";
+import Footer from "./footer.js";
 
 //mocking data coming from the server. normally we would ask the server to get us some data from a database
 let invoices = [
@@ -154,42 +155,45 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Title text={"Your invoices"} />
-        {/*did not extract this button into extra component as it only appears one time ever in the whole app*/}
-        <img
-          onClick={() => {
-            this.showDialogueAddButton();
-          }}
-          src="/add1.png"
-        />
-        {/*as soon as we retrive the invoices and put them into state they appear
+      <div className="wrapper">
+        <div className="container">
+          <Title text={"Your invoices"} />
+          {/*did not extract this button into extra component as it only appears one time ever in the whole app*/}
+          <img
+            onClick={() => {
+              this.showDialogueAddButton();
+            }}
+            src="/add1.png"
+          />
+          {/*as soon as we retrive the invoices and put them into state they appear
         on screen. providing invoices to render on screen, function to show the edit dialogue and to delete the
         invoice (for both buttons it has inside)*/}
-        {this.state.invoices && (
-          <Invoices
-            invoices={this.state.invoices}
-            showDialogueEditButton={this.showDialogueEditButton}
-            deleteInvoice={this.deleteInvoice}
-          />
-        )}
-        {/*when the button/image click sets editDialogueShown to true in the state.
+          {this.state.invoices && (
+            <Invoices
+              invoices={this.state.invoices}
+              showDialogueEditButton={this.showDialogueEditButton}
+              deleteInvoice={this.deleteInvoice}
+            />
+          )}
+          {/*when the button/image click sets editDialogueShown to true in the state.
         passing current invoice to populate the input fields and update invoice function to be
         triggered on click on the done button*/}
-        {this.state.editDialogueShown && (
-          <InvoiceDialogueEdit
-            invoice={this.state.currentInvoice}
-            updateInvoice={this.updateInvoice}
-          />
-        )}
-        {/*when the button/image click sets addDialogueShown to true in the state */}
-        {this.state.addDialogueShown && (
-          <InvoiceDialogueAdd
-            hideAddDialogue={this.hideAddDialogue}
-            handleSelection={this.handleSelection}
-            selectedResult={this.state.selectedResult}
-          />
-        )}
+          {this.state.editDialogueShown && (
+            <InvoiceDialogueEdit
+              invoice={this.state.currentInvoice}
+              updateInvoice={this.updateInvoice}
+            />
+          )}
+          {/*when the button/image click sets addDialogueShown to true in the state */}
+          {this.state.addDialogueShown && (
+            <InvoiceDialogueAdd
+              hideAddDialogue={this.hideAddDialogue}
+              handleSelection={this.handleSelection}
+              selectedResult={this.state.selectedResult}
+            />
+          )}
+        </div>
+        <Footer />
       </div>
     );
   }

@@ -148,3 +148,14 @@ button {
   background: #e5d4c0;
   border-radius: 10px;
 }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

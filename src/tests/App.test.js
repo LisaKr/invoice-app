@@ -6,7 +6,7 @@ describe("app.js", () => {
   it("renders main div with the right class", () => {
     const wrapper = mount(<App />);
     const div = wrapper.find("div").at(0);
-    expect(div.hasClass("container")).toBe(true);
+    expect(div.hasClass("wrapper")).toBe(true);
   });
 
   it("fires an event after clicking on the add button", () => {
