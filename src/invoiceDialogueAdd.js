@@ -13,6 +13,7 @@ const ComponentForSmallScreen = MatchMediaHOC(
 class InvoiceDialogueAdd extends Component {
   constructor() {
     super();
+    //starrting out with toggle off, no amoint set and only no Iban shown
     this.state = { checked: false, amount: null, ibanFieldShown: false };
     this.handleChange = this.handleChange.bind(this);
     this.getClass = this.getClass.bind(this);
@@ -31,13 +32,13 @@ class InvoiceDialogueAdd extends Component {
   //this function is passed down to big component which in turns passes it to both iban and noniban fields.
   //in the future it should also be passed to the small component
   getClass(value, id) {
-    if (this.state.checked === false && value === "information") {
+    if (this.state.checked === false && value === "manual") {
       return "active information";
-    } else if (this.state.checked === false && value === "payment") {
+    } else if (this.state.checked === false && value === "iban") {
       return "non-active payment";
-    } else if (this.state.checked === true && value === "information") {
+    } else if (this.state.checked === true && value === "manual") {
       return "non-active information";
-    } else if (this.state.checked === true && value === "payment") {
+    } else if (this.state.checked === true && value === "iban") {
       return "active payment";
     } else if (this.state.amount && !this.state.checked && value === "button") {
       return "active";

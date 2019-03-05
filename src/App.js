@@ -40,6 +40,13 @@ class App extends Component {
       addDialogueShown: false,
       currentInvoice: {}
     };
+    //we need to bind here to bind the methods/functions to the context of the whole component,
+    //otherwise this would be bound to just the small context of the method itself.
+    //instead we could also use arrow functions in render because they dont bind this
+    //however: The problem with this syntax is that a different callback is created each time component renders. In most cases, this is fine.
+    //However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering.
+    //Generally, if you refer to a method without () after it, such as onClick={this.handleClick},
+    //you should bind that method.
     this.showDialogueEditButton = this.showDialogueEditButton.bind(this);
     this.showDialogueAddButton = this.showDialogueAddButton.bind(this);
     this.hideAddDialogue = this.hideAddDialogue.bind(this);
@@ -55,7 +62,7 @@ class App extends Component {
     });
   }
 
-  //this function is passed to invoices which in turn passes it to the editAndDeleteButtons. the edit button triggers this
+  //this function is passed to invoices component which in turn passes it to the editAndDeleteButtons. the edit button triggers this
   //function and passes back the details of the invoice this button belongs to. this data gets put in state in order to be
   //passed to the Edit Dialogue to pre-populate the fields. it is also used later on in updating the edited invoice. also
   //the edit dialogue itself gets shown
@@ -66,9 +73,9 @@ class App extends Component {
     currentInvoice.amount = amount;
     currentInvoice.iban = iban; //updating value
 
-    this.setState({ currentInvoice });
     this.setState({
-      editDialogueShown: true
+      editDialogueShown: true,
+      currentInvoice: currentInvoice
     });
   }
 
@@ -85,17 +92,17 @@ class App extends Component {
   //which component is being added from invoiceDialogueAdd which in turn gets it
   //from IbanField/NoIbanField (it's what the user puts in the input field)
   hideAddDialogue(date, title, amount, iban) {
-    let temp = this.state.invoices.slice();
-    temp.push({
-      id: invoices.length + 1,
-      date: date,
-      title: title,
-      amount: amount,
-      iban: iban || "no iban"
-    });
+    // let temp = this.state.invoices.slice();
+    let tempObj = {};
+
+    tempObj.id = this.state.invoices.length + 1;
+    tempObj.date = date;
+    tempObj.title = title;
+    tempObj.amount = amount;
+    tempObj.iban = iban || "no iban";
 
     this.setState({
-      invoices: temp,
+      invoices: [...this.state.invoices, tempObj],
       addDialogueShown: false
     });
   }
@@ -111,7 +118,6 @@ class App extends Component {
   //runs after the done button in the edit dialogue is clicked. the data is coming from the input fileds in the
   //edit dialogue. updates the current state with the updated invoice
   updateInvoice(id, iban, amount) {
-    console.log(id, iban, amount);
     //normally there will be a request to the server to update the database
     let invoicesCopy = this.state.invoices.slice(); //creating copy of object
 
@@ -129,10 +135,6 @@ class App extends Component {
         } else if (amount === undefined && iban !== undefined) {
           i.iban = iban;
           i.amount = this.state.currentInvoice.amount;
-          //if nothing was updated
-        } else {
-          i.amount = this.state.currentInvoice.amount;
-          i.iban = this.state.currentInvoice.iban;
         }
       }
     });
@@ -146,10 +148,8 @@ class App extends Component {
   //runs after clicking on the delete button in editAndDeleteButtons. provided with the id of the invoice it belonged to
   //updates state with the new invoices
   deleteInvoice(id) {
-    let temp = this.state.invoices.slice();
-    temp = temp.filter(inv => inv.id != id);
     this.setState({
-      invoices: temp
+      invoices: this.state.invoices.filter(inv => inv.id != id)
     });
   }
 

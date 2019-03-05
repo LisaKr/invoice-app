@@ -49,12 +49,12 @@ class IbanField extends Component {
     }
 
     this.setState({ searchResults: matches });
-    return matches;
   }
+
   //shows done button and provides it with the selected entry
   showDoneButton(date, title, amount, iban) {
     this.setState({
-      showDoneButton: true,
+      doneButtonShown: true,
       date: date,
       title: title,
       amount: amount,
@@ -84,7 +84,7 @@ class IbanField extends Component {
           />
         )}
 
-        {this.state.showDoneButton && (
+        {this.state.doneButtonShown && (
           <DoneButton
             getClass={this.props.getClass}
             date={this.state.date}

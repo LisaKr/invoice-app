@@ -10,7 +10,7 @@ class BigScreen extends Component {
       <div className="bigScreen">
         {/*sidebar is always shown, the active tab is signified by color (this is why we're passing the getClass)*/}
         <SideBarWithTabs getClass={this.props.getClass} />
-        {/*if the toggle is off and the next button is not clicked*/}
+        {/*if the next button is not clicked*/}
         {!this.props.ibanFieldShown && (
           <NoIbanField
             checked={this.props.checked}
@@ -18,6 +18,8 @@ class BigScreen extends Component {
             handleChange={this.props.handleChange}
             hideAddDialogue={this.props.hideAddDialogue}
             getClass={this.props.getClass}
+            //gets passed after being set to state in parent
+            //after the user puts stuff into input fields in this component, so that done button can use it
             date={this.props.date}
             title={this.props.title}
             amount={this.props.amount}
