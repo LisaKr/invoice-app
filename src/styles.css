@@ -21,6 +21,7 @@ input {
   border-radius: 10px;
   background: #9aa0a8;
   overflow: scroll;
+  height: 35em;
 }
 
 img {
